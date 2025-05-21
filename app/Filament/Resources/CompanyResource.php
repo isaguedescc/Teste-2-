@@ -10,8 +10,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
 
 class CompanyResource extends Resource
 {
@@ -21,9 +23,21 @@ class CompanyResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
-            ->schema([
-                //
+        ->schema([
+            TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+            TextInput::make('email')
+                ->email()
+                ->maxLength(255),
+            TextInput::make('phone')
+                ->maxLength(255),
+            TextInput::make('address')
+                ->maxLength(255),
+                TextInput::make('cnpj')
+                ->maxLength(255),
             ]);
     }
 
@@ -31,7 +45,13 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                ->searchable()
+                ->sortable(),
+                TextColumn::make('cnpj')
+                ->searchable(),
+                TextColumn::make('phone')
+                ->searchable(),
             ])
             ->filters([
                 //
