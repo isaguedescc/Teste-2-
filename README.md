@@ -3,7 +3,7 @@
 
 Sistema desenvolvido para automatizar e organizar os processos internos de escritórios contábil
 
-![Texto alternativo](imagemReadme.md)
+![Texto alternativo](imagemReadme.md.png)
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
