@@ -1,7 +1,9 @@
 
 # Sistema de Gestão para Escritórios contábeis
 
-Sistema desenvolvido para automatizar e organizar os processos internos de escritórios contábeis.
+Sistema desenvolvido para automatizar e organizar os processos internos de escritórios contábil
+
+![Texto alternativo](imagemReadme.md)
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
