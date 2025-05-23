@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('company_id');
+            $table->foreignId('user_id');
             $table->string('type_tax');
             $table->string('tax_name');
             $table->decimal('value', 15, 2);
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->date('competence_month');
             $table->string('status');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')->on('accountings');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

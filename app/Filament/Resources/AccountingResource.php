@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Company;
+
 
 class AccountingResource extends Resource
 {
@@ -22,9 +24,41 @@ class AccountingResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+                Forms\Components\Select::make('user_id') // Adicione este campo
+                ->relationship('user', 'name') // Assumindo que você tem uma relação 'user' no modelo Accounting e quer exibir o 'name' do usuário
+                ->required()
+                ->label('Responsável'),
+                Forms\Components\Select::make('company_id')
+                ->relationship('company', 'name')
+                ->required()
+                ->label('Empresa'),
+            Forms\Components\Textarea::make('description')
+                ->required()
+                ->label('Descrição'),
+                Forms\Components\Select::make('type')
+                ->required()
+                ->options([
+                    'Entrada' => 'Entrada',
+                    'Saída' => 'Saída',
+                ])
+                ->label('Tipo'),
+            Forms\Components\TextInput::make('value')
+                ->numeric()
+                ->prefix('R$ ')
+                ->label('Valor de entrada'),
+            Forms\Components\TextInput::make('amount')
+                ->required()
+                ->numeric()
+                ->prefix('R$ ')
+                ->label('Quantia Total'),
+            Forms\Components\DatePicker::make('date')
+                ->required()
+                ->label('Data entrada'),
+            Forms\Components\DatePicker::make('competence_month')
+                ->required()
+                ->label('Vencimento'),
+        ]);
     }
 
     public static function table(Table $table): Table

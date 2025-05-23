@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('financials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('type');
+            $table->foreignId('company_id');
+            $table->foreignId('user_id');
             $table->string('description');
             $table->decimal('value', 15, 2);
             $table->date('date');
