@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('type');
             $table->decimal('amount', 15, 2);
-            $table->string('status');
             $table->string('description');
             $table->decimal('value', 15, 2);
             $table->date('date');

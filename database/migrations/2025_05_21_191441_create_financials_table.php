@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('date');
             $table->date('competence_month');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         
     }

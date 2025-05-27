@@ -36,7 +36,7 @@ class AccountingResource extends Resource
             Forms\Components\Textarea::make('description')
                 ->required()
                 ->label('Descrição'),
-                Forms\Components\Select::make('type')
+         Forms\Components\Select::make('type')
                 ->required()
                 ->options([
                     'Entrada' => 'Entrada',
@@ -65,7 +65,12 @@ class AccountingResource extends Resource
     {
         return $table
             ->columns([
-                //
+ Tables\Columns\TextColumn::make('description')
+ ->label('Nome'),
+ Tables\Columns\TextColumn::make('date')
+ ->label('Data'),
+ Tables\Columns\TextColumn::make('value')
+ ->label('Valor'),
             ])
             ->filters([
                 //

@@ -12,6 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select; // Adicione esta linha
+use App\Filament\Resources\Company;
+use App\Filament\Resources\User;
+
 
 class FinancialResource extends Resource
 {
@@ -23,7 +27,7 @@ class FinancialResource extends Resource
     {
         return $form
             ->schema([
-                //
+             
             ]);
     }
 

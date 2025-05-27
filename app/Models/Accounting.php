@@ -19,9 +19,12 @@ class Accounting extends Model
     protected $fillable = [
         'description',
         'amount',
-        'due_date',
+        'date',
         'company_id',
         'user_id',
+        'type',
+        'value',
+        'competence_month',
         'created_at',
         'updated_at',
     ];
