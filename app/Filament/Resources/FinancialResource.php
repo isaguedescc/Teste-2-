@@ -27,7 +27,35 @@ class FinancialResource extends Resource
     {
         return $form
             ->schema([
-             
+             Forms\Components\Select::make('user_id')
+             ->relationship('user', 'name') 
+             ->required()
+             ->label('Responsável'), 
+             Forms\Components\Select::make('company_id')
+             ->relationship('company', 'name') 
+             ->required()
+             ->label('Empresa'),
+             Forms\Components\Select::make('type')
+             ->options([
+             'Tipo 1' => 'Fixo',
+             'Tipo 2' => 'Variável',
+             'Tipo 3' => 'Extraórdinário',
+             ])
+             ->required()
+             ->label('Tipo'),
+             Forms\Components\Textarea::make('description')
+                ->required()
+                ->label('Descrição'),
+                Forms\Components\TextInput::make('value')
+                ->numeric()
+                ->prefix('R$ ')
+                ->label('Valor de entrada'),
+                Forms\Components\DatePicker::make('date')
+                ->required()
+                ->label('Data entrada'),
+                Forms\Components\DatePicker::make('competence_month')
+                ->required()
+                ->label('Vencimento'),
             ]);
     }
 

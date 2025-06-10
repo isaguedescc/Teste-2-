@@ -12,11 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taxes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('type'); // ISS, ICMS, IRPJ, etc
-            $table->text('descrytion')->nullable();
-            $table->timestamps();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+
+            // Add nullable columns for 'value' (decimal 8,2), 'due_date' (date), 'competence_month' (date), and 'status' (string)
+            $table->decimal('value', 8, 2)->nullable();
+            $table->date('due_date')->nullable();
+            $table->date('competence_month')->nullable();
+            $table->string('status')->nullable();
         });
     }
 

@@ -23,4 +23,14 @@ class Company extends Model
         'cnpj',
     ];
       //
+
+      public function Accounting()
+      {
+          return $this->belongsTo(Accounting::class);
+      }
+  
+      public function user()
+      {
+          return $this->belongsTo(User::class);
+      }
 }

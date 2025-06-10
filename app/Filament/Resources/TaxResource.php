@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Resources\Name;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,7 +24,44 @@ class TaxResource extends Resource
     {
         return $form
             ->schema([
-                //
+             Forms\Components\Select::make('user_id')
+             ->relationship('user', 'name') 
+             ->required()
+             ->label('Responsável'), 
+             Forms\Components\Select::make('company_id')
+             ->relationship('company', 'name') 
+             ->required()
+             ->label('Empresa'),
+             Forms\Components\TextInput::make('name')
+             ->required()
+             ->maxLength(255),
+             Forms\Components\Select::make('type')
+             ->options([
+             'ISS' => 'ISS',
+             'ICMS' => 'CMS',
+             'IRPJ' => 'IRPJ',
+             'IPI' => 'IPI',
+             ])
+             ->required()
+             ->label('Tipo'),
+             Forms\Components\TextInput::make('value')
+             ->numeric()
+             ->prefix('R$ ')
+             ->label('Valor de entrada'),
+             Forms\Components\DatePicker::make('date')
+             ->required()
+             ->label('Data entrada'),
+             Forms\Components\DatePicker::make('competence_month')
+             ->required()
+             ->label('Vencimento'),
+             Forms\Components\Select::make('status')
+             ->options([
+             'status 1' => 'Pendente',
+             'status 2' => 'Pago',
+             'status 3' => 'Vencido',
+             ])
+             ->required()
+             ->label('Status'),
             ]);
     }
 
