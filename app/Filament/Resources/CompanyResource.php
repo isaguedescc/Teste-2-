@@ -28,15 +28,23 @@ class CompanyResource extends Resource
         ->schema([
             TextInput::make('name')
                 ->required()
-                ->maxLength(255),
+                ->maxLength(255)
+                ->label('Nome'),
             TextInput::make('email')
                 ->email()
+                ->required()
                 ->maxLength(255),
             TextInput::make('phone')
+                ->required()
+                ->label('Telefone')
                 ->maxLength(255),
             TextInput::make('address')
+                ->required()
+                ->label('Endereço')
                 ->maxLength(255),
                 TextInput::make('cnpj')
+                ->required()
+                ->label('CNPJ')
                 ->maxLength(255),
             ]);
     }

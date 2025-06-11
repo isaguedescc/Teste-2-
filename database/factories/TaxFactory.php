@@ -17,7 +17,12 @@ class TaxFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'company_id' => Company::factory(),
+            'user_id' => User::factory(),
+            'value' => $this->faker->randomFloat(2, 10, 1000), // Decimal with 2 places, between 10 and 1000
+            'due_date' => $this->faker->date(),
+            'competence_month' => $this->faker->date('Y-m-01'), // First day of a month
+            'status' => $this->faker->randomElement(['paid', 'pending', 'overdue']),
         ];
     }
 }
