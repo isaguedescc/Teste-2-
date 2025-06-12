@@ -10,7 +10,6 @@ class Tax extends Model
     use HasFactory;
     protected $fillable = [
         'type',
-        'name',
         'value',
         'due_date',
         'competence_month',

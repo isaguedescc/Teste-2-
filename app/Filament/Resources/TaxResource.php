@@ -10,7 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use App\Filament\Resources\Name;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -32,9 +31,6 @@ class TaxResource extends Resource
              ->relationship('company', 'name') 
              ->required()
              ->label('Empresa'),
-             Forms\Components\TextInput::make('name')
-             ->required()
-             ->maxLength(255),
              Forms\Components\Select::make('type')
              ->options([
              'ISS' => 'ISS',
@@ -48,7 +44,7 @@ class TaxResource extends Resource
              ->numeric()
              ->prefix('R$ ')
              ->label('Valor de entrada'),
-             Forms\Components\DatePicker::make('date')
+             Forms\Components\DatePicker::make('due_date')
              ->required()
              ->label('Data entrada'),
              Forms\Components\DatePicker::make('competence_month')

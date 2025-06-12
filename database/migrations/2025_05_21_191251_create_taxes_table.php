@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->foreignId('company_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
-
-            // Add nullable columns for 'value' (decimal 8,2), 'due_date' (date), 'competence_month' (date), and 'status' (string)
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3755947523.
+            $table->string('type')->nullable();
             $table->decimal('value', 8, 2)->nullable();
             $table->date('due_date')->nullable();
             $table->date('competence_month')->nullable();

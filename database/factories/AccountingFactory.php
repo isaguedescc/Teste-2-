@@ -21,10 +21,12 @@ class AccountingFactory extends Factory
             'company_id' => \App\Models\Company::factory(), // Gera um ID de empresa fictícia
             'description' => $this->faker->sentence(), // Gera uma frase fictícia
             'type' => $this->faker->randomElement(['Entrada', 'Saída']), // Seleciona aleatoriamente 'Entrada' ou 'Saída'
-            'value' => $this->faker->randomFloat(2, 10, 1000), // Gera um float com 2 casas decimais entre 10 e 1000
-            'total_amount' => $this->faker->randomFloat(2, 100, 5000), // Gera um float com 2 casas decimais entre 100 e 5000
-            'entry_date' => $this->faker->date(), // Gera uma data fictícia
-            'due_date' => $this->faker->date(), // Gera uma data fictícia
+            'value' => $this->faker->randomFloat(2, 10, 1000), 
+            'date' => $this->faker->date(), // Gera uma data fictícia
+            'competence_month' => $this->faker->date(), // Gera uma data fictícia'
+            'amount' => $this->faker->randomFloat(2, 10, 1000), // Gera um float com 2 casas decimais entre 10 e 1000
+            'created_at' => $this->faker->date(),
+            'updated_at' => $this->faker->date(), // Gera uma data fictícia
         ];
     }
 }
