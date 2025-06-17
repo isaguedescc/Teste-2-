@@ -63,7 +63,15 @@ class FinancialResource extends Resource
     {
         return $table
             ->columns([
-                //
+                    Tables\Columns\TextColumn::make('description')
+                    ->label('Nome')
+                    ->searchable(),
+                    Tables\Columns\TextColumn::make('date')
+                    ->searchable()
+                    ->label('Data'),
+                    Tables\Columns\TextColumn::make('value')
+                    ->searchable()
+                    ->label('Valor'),
             ])
             ->filters([
                 //

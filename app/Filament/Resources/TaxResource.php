@@ -65,7 +65,13 @@ class TaxResource extends Resource
     {
         return $table
             ->columns([
-                //
+                    Tables\Columns\TextColumn::make('user_id')
+                    ->searchable()
+                    ->label('Responsável'),
+                    
+                    Tables\Columns\TextColumn::make('status')
+                    ->searchable()
+                    ->label('Status'),
             ])
             ->filters([
                 //

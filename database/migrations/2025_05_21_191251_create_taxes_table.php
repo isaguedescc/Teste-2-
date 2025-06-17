@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taxes', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('company_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:3755947523.
