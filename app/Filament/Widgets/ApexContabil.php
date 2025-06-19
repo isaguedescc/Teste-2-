@@ -11,14 +11,15 @@ class ApexContabil extends ApexChartWidget
      *
      * @var string
      */
-    protected static ?string $chartId = 'apexContabil';
+    protected static ?string $chartId = 'apexAcconting';
+    
 
     /**
      * Widget Title
      *
      * @var string|null
      */
-    protected static ?string $heading = 'ApexContabil';
+    protected static ?string $heading = 'Contábil';
 
     /**
      * Chart options (series, labels, types, size, animations...)
@@ -28,18 +29,46 @@ class ApexContabil extends ApexChartWidget
      */
     protected function getOptions(): array
     {
-        return [
-            'chart' => [
-                'type' => 'donut',
-                'height' => 300,
+        $data = \App\Models\Accounting::selectRaw("strftime('%m', date) as month, SUM(amount) as total")
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total', 'month')
+        ->toArray();
+
+
+    $months = array_map(function($monthNumber) {
+        return date('M', mktime(0, 0, 0, (int)$monthNumber, 10));
+    }, array_keys($data));
+
+    $totals = array_values($data);
+
+    return [
+        'chart' => [
+            'type' => 'column',
+            'height' => 300,
+        ],
+        'series' => [
+            [
+                'name' => 'Valor de Entrada Mensal',
+                'data' => $totals,
             ],
-            'series' => [2, 4, 6, 10, 14],
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-            'legend' => [
-                'labels' => [
+        ],
+        'xaxis' => [
+            'categories' => $months,
+            'labels' => [
+                'style' => [
                     'fontFamily' => 'inherit',
                 ],
             ],
-        ];
+        ],
+        'yaxis' => [
+            'labels' => [
+                'style' => [
+                    'fontFamily' => 'inherit',
+                ],
+            ],
+        ],
+        'colors' => ['#10b981'],
+    ];
     }
 }

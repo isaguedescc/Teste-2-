@@ -12,13 +12,14 @@ class ApexTax extends ApexChartWidget
      * @var string
      */
     protected static ?string $chartId = 'apexTax';
-
+    
+    
     /**
      * Widget Title
      *
      * @var string|null
      */
-    protected static ?string $heading = 'ApexTax';
+    protected static ?string $heading = 'Tax';
 
     /**
      * Chart options (series, labels, types, size, animations...)
@@ -28,36 +29,45 @@ class ApexTax extends ApexChartWidget
      */
     protected function getOptions(): array
     {
-        return [
-            'chart' => [
-                'type' => 'line',
-                'height' => 300,
+        $data = \App\Models\Tax::selectRaw("strftime('%m', due_date) as month, SUM(value) as total")
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total', 'month')
+        ->toArray();
+
+    $months = array_map(function($monthNumber) {
+        return date('M', mktime(0, 0, 0, (int)$monthNumber, 10));
+    }, array_keys($data));
+
+    $totals = array_values($data);
+
+    return [
+        'chart' => [
+            'type' => 'bar',
+            'height' => 300,
+        ],
+        'series' => [
+            [
+                'name' => 'Valor de Impostos Mensal',
+                'data' => $totals,
             ],
-            'series' => [
-                [
-                    'name' => 'ApexTax',
-                    'data' => [2, 4, 6, 10, 14, 7, 2, 9, 10, 15, 13, 18],
+        ],
+        'xaxis' => [
+            'categories' => $months,
+            'labels' => [
+                'style' => [
+                    'fontFamily' => 'inherit',
                 ],
             ],
-            'xaxis' => [
-                'categories' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
+        ],
+        'yaxis' => [
+            'labels' => [
+                'style' => [
+                    'fontFamily' => 'inherit',
                 ],
             ],
-            'yaxis' => [
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
-            ],
-            'colors' => ['#f59e0b'],
-            'stroke' => [
-                'curve' => 'smooth',
-            ],
-        ];
+        ],
+        'colors' => ['#ef4444'],
+    ];
     }
 }
